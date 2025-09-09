@@ -9,7 +9,7 @@ connectDB();
 const app = express();
 
 app.use(cors({
-    origin: ['http://localhost:5173', 'https://task-time-tracking-app.vercel.app', process.env.FRONTEND_URL],
+    origin: ['http://localhost:5173', 'https://task-time-tracking-app.vercel.app'],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
