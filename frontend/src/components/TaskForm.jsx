@@ -12,7 +12,7 @@ const TaskForm = ({ fetchTasks }) => {
     try {
       const token = localStorage.getItem('token');
       await axios.post(
-        '/api/tasks',
+        `${import.meta.env.VITE_API_URL}/api/tasks`,
         { title, description },
         { headers: { Authorization: `Bearer ${token}` } }
       );

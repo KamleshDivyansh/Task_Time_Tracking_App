@@ -23,7 +23,7 @@ const Timer = ({ taskId }) => {
     try {
       const token = localStorage.getItem('token');
       const res = await axios.post(
-        '/api/timelogs/start',
+        `${import.meta.env.VITE_API_URL}/api/timelogs/start`,
         { taskId },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -39,7 +39,7 @@ const Timer = ({ taskId }) => {
     try {
       const token = localStorage.getItem('token');
       await axios.put(
-        `/api/timelogs/stop/${timeLogId}`,
+        `${import.meta.env.VITE_API_URL}/api/timelogs/stop/${timeLogId}`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );

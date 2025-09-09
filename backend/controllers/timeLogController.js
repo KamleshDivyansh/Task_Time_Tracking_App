@@ -35,7 +35,7 @@ exports.getTimeLogs = async (req, res) => {
         const { taskId } = req.query;
         const query = { userId: req.userId };
         if (taskId) query.taskId = taskId;
-        
+
         const timeLogs = await TimeLog.find(query).populate('taskId');
         res.json(timeLogs);
     } catch (err) {

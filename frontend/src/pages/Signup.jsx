@@ -12,7 +12,7 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(`${process.env.REACT_APP_API_URL}/api/auth/signup`, { email, password });
+      await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/signup`, { email, password });
       navigate('/login');
     } catch (err) {
       setError(err.response?.data?.error || 'Signup failed');

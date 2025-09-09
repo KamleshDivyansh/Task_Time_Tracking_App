@@ -21,7 +21,7 @@ const TaskList = ({ tasks, fetchTasks }) => {
     try {
       const token = localStorage.getItem('token');
       await axios.put(
-        `/api/tasks/${id}`,
+        `${import.meta.env.VITE_API_URL}/api/tasks/${id}`,
         { title: editTitle, description: editDescription, status: editStatus },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -35,7 +35,7 @@ const TaskList = ({ tasks, fetchTasks }) => {
   const handleDelete = async (id) => {
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`/api/tasks/${id}`, {
+      await axios.delete(`${import.meta.env.VITE_API_URL}/api/tasks/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       fetchTasks();

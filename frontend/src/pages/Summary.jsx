@@ -13,7 +13,7 @@ const Summary = () => {
         const fetchSummary = async () => {
             try {
                 const token = localStorage.getItem('token');
-                const res = await axios.get('/api/timelogs/summary', {
+                const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/timelogs/summary`, {
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 setSummary(res.data);
