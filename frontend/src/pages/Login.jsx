@@ -1,0 +1,63 @@
+import React, { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { TextField, Button, Typography, Alert, Container, Paper, Box } from '@mui/material';
+
+const Login = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post('/api/auth/login', { email, password });
+      localStorage.setItem('token', res.data.token);
+      navigate('/');
+    } catch (err) {
+      setError(err.response?.data?.error || 'Login failed');
+    }
+  };
+
+  return (
+    <Container maxWidth="xs" className="min-h-screen flex items-center justify-center">
+      <Paper elevation={6} className="p-8 rounded-lg w-full">
+        <Box className="text-center mb-6">
+          <Typography variant="h4" color="primary">Login</Typography>
+        </Box>
+        {error && <Alert severity="error" className="mb-4">{error}</Alert>}
+        <form onSubmit={handleSubmit} className="space-y-4 flex flex-col gap-4">
+          <TextField
+            label="Email"
+            type="email"
+            fullWidth
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            variant="outlined"
+          />
+          <TextField
+            label="Password"
+            type="password"
+            fullWidth
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            variant="outlined"
+          />
+          <Button type="submit" variant="contained" color="primary" fullWidth size="large">
+            Login
+          </Button>
+        </form>
+        <Box className="text-center mt-4">
+          <Typography variant="body2">
+            Don't have an account? <a href="/signup" className="text-blue-500 hover:underline">Signup</a>
+          </Typography>
+        </Box>
+      </Paper>
+    </Container>
+  );
+};
+
+export default Login;
