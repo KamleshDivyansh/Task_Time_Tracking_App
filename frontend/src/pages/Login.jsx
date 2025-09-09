@@ -9,13 +9,21 @@ const Login = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (localStorage.getItem('token')) {
+      navigate('/');
+    }
+  }, [navigate]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/login`, { email, password });
       localStorage.setItem('token', res.data.token);
-      navigate('/');
+      setError('');
+      navigate('/', { replace: true });
     } catch (err) {
+      console.error('Login error:', err.response);
       setError(err.response?.data?.error || 'Login failed');
     }
   };
@@ -52,7 +60,14 @@ const Login = () => {
         </form>
         <Box className="text-center mt-4">
           <Typography variant="body2">
-            Don't have an account? <a href="/signup" className="text-blue-500 hover:underline">Signup</a>
+            Don't have an account?
+            <Button
+              variant="text"
+              onClick={() => navigate('/signup', { replace: true })}
+              className="text-blue-500 hover:underline"
+            >
+              Sign up
+            </Button>
           </Typography>
         </Box>
       </Paper>
