@@ -10,8 +10,11 @@ const app = express();
 
 app.use(cors({
     origin: ['http://localhost:5173', 'https://task-time-tracking-app.vercel.app/'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
 }));
+app.options('*', cors());
 app.use(express.json());
 
 app.use('/api/auth', require('./routes/authRoutes'));
