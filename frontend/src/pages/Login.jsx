@@ -21,8 +21,8 @@ const Login = () => {
       const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/login`, { email, password });
       localStorage.setItem('token', res.data.token);
       setError('');
-      window.location.reload();
       navigate('/');
+      window.location.reload();
     } catch (err) {
       console.error('Login error:', err.response);
       setError(err.response?.data?.error || 'Login failed');
