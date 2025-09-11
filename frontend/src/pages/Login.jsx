@@ -22,7 +22,7 @@ const Login = () => {
       localStorage.setItem('token', res.data.token);
       setError('');
       window.location.reload();
-      navigate('/', { replace: true });
+      navigate('/');
     } catch (err) {
       console.error('Login error:', err.response);
       setError(err.response?.data?.error || 'Login failed');
